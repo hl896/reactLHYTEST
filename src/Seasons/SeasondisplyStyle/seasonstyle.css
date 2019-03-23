@@ -1,0 +1,62 @@
+#root7 div  h1:nth-child(1){
+    position: absolute;
+    
+    left: 5%;
+    top: 5%;
+}
+#root7 .border.red {
+    position: relative;
+    display: block;
+    height: 100vh;
+}
+
+#root7 div  h1:nth-child(3){
+    position: absolute;
+    
+    right: 5%;
+    
+    bottom: 5%;
+}
+
+#root7 div  h1:nth-child(2){
+    position: absolute;
+    vertical-align: middle;
+    top: 40%;
+    left: 40%;
+
+}
+
+
+
+.season-display{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 98vh;
+}
+
+.winter{
+    background-color: aliceblue;
+}
+.summer{
+    background-color:orange;
+}
+.spring{
+    background-color: greenyellow;
+}
+.autumn{
+    background-color: lightblue;
+}
+
+.season-display.winter i{
+    color: blue;
+}
+.season-display.summer i{
+    color: red;
+}
+.season-display.spring i{
+    color: pink;
+}
+.season-display.autumn i{
+    color: orange;
+}
