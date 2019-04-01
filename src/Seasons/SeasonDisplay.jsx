@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { runInContext } from 'vm';
 import './SeasondisplyStyle/seasonstyle.css';
+import SearchApp from '../search/SearchApp';
 
 const seasonConfig = {
     summer:{
@@ -74,32 +75,65 @@ const getSeason=(lat,month)=>{
 
 
 
-const addnew =()=>{
 
-    return(
-        <div>
-            new Component
-        </div>
-    );
-}
 
-const SeasonDisplay =props=>{
-    const season = getSeason(props.lat,new Date().getMonth());
-    // const season ='summer';
-    const {text, iconName}=seasonConfig[season];
-    const addnew= addnew();
+// const SeasonDisplay =props=>{
+//     const season = getSeason(props.lat,new Date().getMonth());
+//     // const season ='summer';
+//     const {text, iconName}=seasonConfig[season];
+    
    
-    return (
-        <div>
-            <div className={`season-display ${season}`} >
-                <h1> <i className={`left-icon huge ${iconName} icon`}/> </h1>
-                <h1><a onClick={addnew()} >{text}</a></h1>
-                <h1><i className={`right-icon huge ${iconName} icon`} /> </h1>
+//     return (
+//         <div>
+//             <div className={`season-display ${season}`} >
+//                 <h1> <i className={`left-icon huge ${iconName} icon`}/> </h1>
+//                 <h1><button onClick={addnew} >{text}</button></h1>
+//                 <h1><i className={`right-icon huge ${iconName} icon`} /> </h1>
+//             </div>
+//         </div>
+//     );
+
+
+// }
+
+class SeasonDisplay extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            status:true
+        }
+        
+    }
+    addnew = () => {
+        console.log('clicked')
+        this.setState(prevState=>({
+            status:!prevState.status
+        }))
+        
+    }
+
+    onSearchSubmit=(e)=>{
+        
+        console.log('SearchAPP-term:'+e)
+    }
+    render(){
+        const season = getSeason(this.props.lats,new Date().getMonth());
+        const {text, iconName}=seasonConfig[season];
+        return (
+            <div>
+                {
+                    this.state.status?<div className={`season-display ${season}`} >
+                        <h1> <i className={`left-icon huge ${iconName} icon`}/> </h1>
+                        <h1><button onClick={this.addnew} >{text}</button></h1>
+                        <h1><i className={`right-icon huge ${iconName} icon`} /> </h1>
+                    </div>:<SearchApp myonSubmit={this.onSearchSubmit} />
+
+                }
             </div>
-        </div>
-    );
-
-
+            
+        );
+    }
+        
 }
 
 export default SeasonDisplay;
