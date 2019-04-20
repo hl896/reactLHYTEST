@@ -1,0 +1,31 @@
+.imageList{
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+    grid-gap: 10px;
+    margin: auto;
+}
+.imageList .imageDiv{
+    width:250px;
+    height: 390px;
+    border: 1px black dotted;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.imageList .imageDiv img{
+    width: 250px;
+    height: 300px;
+    max-height: 300px;
+}
+.imageList .imageDiv p{
+    overflow-y: scroll;
+    height: 60px;
+}
+.imageList .imageDiv p::-webkit-scrollbar,.imageList .imageDiv h3::-webkit-scrollbar{
+    width: 0;
+    background: rgba(red, green, blue, 0);
+}
+.imageList .imageDiv h3{
+    height: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

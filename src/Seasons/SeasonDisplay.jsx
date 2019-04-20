@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { runInContext } from 'vm';
 import './SeasondisplyStyle/seasonstyle.css';
 import SearchApp from '../search/SearchApp';
-
+import unsplash from '../api/unsplash';
+import ImageList from '../search/ImageList';
 const seasonConfig = {
     summer:{
         text:"Let's hit the beach!",
@@ -100,7 +101,8 @@ class SeasonDisplay extends Component{
     constructor(props){
         super(props);
         this.state={
-            status:true
+            status:true,
+            image:[]
         }
         
     }
@@ -112,9 +114,19 @@ class SeasonDisplay extends Component{
         
     }
 
-    onSearchSubmit=(e)=>{
+    onSearchSubmit=async term =>{
+        const response = await unsplash
+        .get('/search/photos',{
+            params:{query:term},
+        })
+        .then(response=>{
+            console.log('results::'+response.data.results);
+            this.setState({
+                image:response.data.results
+            });
+        });
         
-        console.log('SearchAPP-term:'+e)
+        
     }
     render(){
         const season = getSeason(this.props.lats,new Date().getMonth());
@@ -126,7 +138,11 @@ class SeasonDisplay extends Component{
                         <h1> <i className={`left-icon huge ${iconName} icon`}/> </h1>
                         <h1><button onClick={this.addnew} >{text}</button></h1>
                         <h1><i className={`right-icon huge ${iconName} icon`} /> </h1>
-                    </div>:<SearchApp myonSubmit={this.onSearchSubmit} />
+                    </div>:<div>
+                        <SearchApp myonSubmit={this.onSearchSubmit} />
+                        <p><h2>List:</h2></p>
+                        <ImageList image={this.state.image}/>
+                        </div>
 
                 }
             </div>
